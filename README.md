@@ -11,9 +11,9 @@ Requisitos:
 
 Pasos:
 1. Clona el proyecto desde Github.
-2. En la carpeta de Obteniendo-RFC abrir y ejecutar el archivo RCL.sql
+2. En la carpeta de Obteniendo-RFC abrir y ejecutar el archivo "RCL.sql"
 3. Abir la solución SolRFC.sln
 4. Dentro de la carpeta Models eliminar el Data Model "UsuarioModel.edmx"
-5.Agregar dentro de la carpeta Models un nuevo ADO.NET Entity Data Model con el nombre de "UsuarioModel" y la connection settings con nombre "G10BEntities"
+5.Agregar dentro de la carpeta Models un nuevo ADO.NET Entity Data Model con el nombre de "UsuarioModel", la connection settings con nombre "G10BEntities" y las tablas de "RCL.sql"
 Ejecutar el programa
 
