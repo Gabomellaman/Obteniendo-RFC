@@ -1,0 +1,60 @@
+﻿@model WebRFC.Models.UsuariosRFC
+
+@{
+    ViewBag.Title = "RFC";
+}
+
+<style>
+    #container {
+        width: 400px;
+        height: 300px;
+        border: solid;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+    }
+
+        #container div {
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5px;
+        }
+
+        #container h2 {
+            text-align: center;
+        }
+
+        #container dl dd {
+            width: 200px;
+            text-align: center;
+            border: solid;
+            border-radius: 15px;
+            margin-left: 25%;
+        }
+</style>
+<div id="container">
+    <h2>Tu RFC es</h2>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dd>
+            @Html.DisplayFor(model => model.RFC)
+        </dd>
+
+    </dl>
+    <div> <button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/IngresaDatos/'">Generar otro RFC</button></div>
+    <div><button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/BaseDatos/'">Ir a base de datos</button> </div>
+    <div> <button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/Index/'">Salir</button></div>
+</div>
+
+@if (TempData["error"] != null)
+{
+    <div>@TempData["error"]</div>
+}

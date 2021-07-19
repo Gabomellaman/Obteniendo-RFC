@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #container {
+        align-items: center;
+        justify-content: center
+    }
+</style>
+<div id="container">
+    <div id="titulo"> <h2>RFC</h2></div>
+    <div>
+        <p>Genera tu Registro Federal de Contribuyentes
+            Solo necesitamos:</p>
+        <ul>
+            <li>Nombre completo en mayúsculas sin acentos</li>
+            <li>Fecha de nacimiento</li>
+        </ul>
+    </div>
+    <div>
+        <p>Vamos a crear tu RFC</p>
+        <input type="button"  name="Iniciar" value="Iniciar" role="link" onclick="window.location='/Home/IngresaDatos/'" />
+    </div>
+
+</div>
+
+

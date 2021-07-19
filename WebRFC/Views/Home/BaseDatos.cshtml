@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebRFC.Models.UsuariosRFC>
+
+
+@{
+    ViewBag.Title = "DaseDatos";
+}
+<style>
+    div button {
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 5px;
+    }
+</style>
+
+<h2>DaseDatos</h2>
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="Buscar">
+    <button class="btn btn-outline-success" type="submit" formaction="/Home/Buscar">Buscar</button>
+</form>
+@if (TempData["contar"] != null)
+{
+    <div>@TempData["contar"]</div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCompleto)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.RFC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        int pasa = 0;
+        int noRepeat = 0;
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            @{
+                //El programa quedo asi por no poder crear tr dentro del razor no permitia separar despues de 2 rfc iguales, se ponian sobre la misma fila
+                foreach (var item2 in Model)
+                {
+                    if (item.RFC != item2.RFC)
+                    {
+
+                    }
+                    else if (pasa == 0)
+                    {
+                        if (item.RFC == item2.RFC && item.Id != item2.Id)
+                        {
+                            noRepeat++;
+                        }
+                    }
+                    else
+                    {
+                        pasa--;
+                    }
+                }
+                pasa = noRepeat + 1;
+                if (noRepeat > 0)
+                {
+                    <td style="color: red">
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+
+                    <td style="color: red">
+                        @Html.DisplayFor(modelItem => item.RFC)
+                    </td>
+                    <td style="color: red">
+                        @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                    </td>
+                    noRepeat--;
+
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RFC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                    </td>
+                }
+
+            }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+
+        </tr>
+    }
+</table>
+<div>
+    <button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/IngresaDatos/'">Generar otro RFC</button>
+    <button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/Index/'">Inicio</button>
+    <button type="button" class="btn btn-dark btn-lg" role="link" onclick="window.location='/Home/Index/'">Salir</button>
+</div>
+@if (TempData["error"] != null)
+{
+    <div>@TempData["error"]</div>
+}

@@ -1,0 +1,122 @@
+﻿@model WebRFC.Models.UsuariosRFC
+
+@{
+    ViewBag.Title = "IngresaDatos";
+}
+
+<h2>IngresaDatos</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>UsuariosRFC</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Paterno, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Paterno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Paterno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Materno, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Materno, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            Fecha de Nacimiento
+            <div class="col-md-10">
+                <input type="date" id="FNacimiento" name="FNacimiento" value="" class="form-control" />
+                @Html.ValidationMessageFor(model => model.FNacimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" onclick="return validar()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@if (TempData["error"]!= null)
+{
+<div>@TempData["error"]</div>
+}
+<script>
+
+    function validar() {
+        var x = "";
+        if ($('#Nombre').val() == "") {
+            $('span[data-valmsg-for="Nombre"]').text('Ingrese nombre');
+            x += "falta nombre ";
+
+        }
+        else {
+            $('span[data-valmsg-for="Nombre"]').text('');
+        }
+        if ($('#Paterno').val() == "") {
+            $('span[data-valmsg-for="Paterno"]').text('Ingrese apellido paterno');
+            x += "falta paterno "
+        }
+        else {
+            $('span[data-valmsg-for="Paterno"]').text('');
+        }
+        
+        if ($('#FNacimiento').val() == "") {
+            $('span[data-valmsg-for="FNacimiento"]').text('Ingrese fecha nacimiento');
+            x += "falta fecha nacimiento "
+        }
+        else {
+            $('span[data-valmsg-for="FNacimiento"]').text('');
+        }
+        
+        if (x != "") {
+            console.log("retorna falso")
+            return false
+        }
+        else {
+            console.log("retorna true")
+            return true
+        }
+
+    }
+    $('#Nombre, #Paterno, #Materno').keypress(function (e) {
+
+        var key = e.keyCode || e.which;
+        var teclado = String.fromCharCode(key).toUpperCase();
+        var letras = " ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        var especiales = "46";
+        teclado_especial = false;
+        
+        if (key == especiales) {
+           teclado_especial = true; 
+        }
+        if (letras.indexOf(teclado) == -1 && !teclado_especial) {
+            return false;
+        }
+
+    });
+    
+   
+    
+</script>
